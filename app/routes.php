@@ -35,6 +35,9 @@ return function (App $app) {
     $app->post('/films', AddFilmController::class);
     $app->delete('/films/{id}', DeleteFilmController::class);
     $app->put('/films/{id}', UpdateFilmController::class);
+
+    // TMDB routes
     $app->get('/searchFilm/{userInput}', TMDBSearchFilmsController::class);
+    $app->get('/searchFilmId/{id}', \App\Controllers\TMDBGetFilmByIdController::class);
 
 };
