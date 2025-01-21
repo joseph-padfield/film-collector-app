@@ -9,7 +9,7 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Controllers\FilmsController;
 use App\Controllers\AddFilmController;
 use App\Controllers\UpdateFilmController;
-use App\Controllers\TMDBController;
+use App\Controllers\TMDBSearchFilmsController;
 
 return function (App $app) {
 
@@ -35,6 +35,6 @@ return function (App $app) {
     $app->post('/films', AddFilmController::class);
     $app->delete('/films/{id}', DeleteFilmController::class);
     $app->put('/films/{id}', UpdateFilmController::class);
-    $app->get('/searchFilm/{userInput}', TMDBController::class);
+    $app->get('/searchFilm/{userInput}', TMDBSearchFilmsController::class);
 
 };

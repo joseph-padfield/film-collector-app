@@ -7,7 +7,7 @@ use App\Models\TMDBModel;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class TMDBController extends Controller
+class TMDBSearchFilmsController extends Controller
 {
     private TMDBModel $model;
 
