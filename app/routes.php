@@ -2,11 +2,26 @@
 declare(strict_types=1);
 
 use App\Controllers\CoursesAPIController;
+use App\Controllers\DeleteFilmController;
 use Slim\App;
 use Slim\Views\PhpRenderer;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+use App\Controllers\FilmsController;
+use App\Controllers\AddFilmController;
+use App\Controllers\UpdateFilmController;
+use App\Controllers\TMDBController;
 
 return function (App $app) {
+
+    $app->add(function($request, $handler)
+    {
+       $response = $handler->handle($request);
+       return $response
+           ->withHeader('Access-Control-Allow-Origin', '*')
+           ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+           ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    });
+
     $container = $app->getContainer();
 
     //demo code - two ways of linking urls to functionality, either via anon function or linking to a controller
@@ -16,6 +31,10 @@ return function (App $app) {
         return $renderer->render($response, "index.php", $args);
     });
 
-    $app->get('/courses', CoursesAPIController::class);
+    $app->get('/films', FilmsController::class);
+    $app->post('/films', AddFilmController::class);
+    $app->delete('/films/{id}', DeleteFilmController::class);
+    $app->put('/films/{id}', UpdateFilmController::class);
+    $app->get('/searchFilm/{userInput}', TMDBController::class);
 
 };
