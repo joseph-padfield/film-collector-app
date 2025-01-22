@@ -37,7 +37,7 @@ return function (App $app) {
     $app->put('/films/{id}', UpdateFilmController::class);
 
     // TMDB routes
-    $app->get('/searchFilm/{userInput}', TMDBSearchFilmsController::class);
+    $app->get('/searchFilm/{userInput}[/{page}]', TMDBSearchFilmsController::class);
     $app->get('/searchFilmId/{id}', \App\Controllers\TMDBGetFilmByIdController::class);
 
 };
