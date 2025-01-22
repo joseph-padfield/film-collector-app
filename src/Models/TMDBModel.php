@@ -6,11 +6,11 @@ use GuzzleHttp\Client;
 
 class TMDBModel
 {
-    public function searchFilmTitle($userInput)
+    public function searchFilmTitle($userInput, $page=1)
     {
         $client = new Client();
 
-        $response = $client->request('GET', 'https://api.themoviedb.org/3/search/movie?query=' . $userInput, [
+        $response = $client->request('GET', 'https://api.themoviedb.org/3/search/movie?query=' . $userInput . '&page=' . $page, [
             'headers' => [
                 'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OGEwYWI0MjYxODZkNjgxMDY5YTdkOTIxZmFiZWU3ZSIsIm5iZiI6MTczMzEzNjU2My4yMDQsInN1YiI6IjY3NGQ5MGIzZTdkNmY4MjkyZTBiOGZjNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dWzkHKvEIR4192_L3d10rXcnIImGs0h2_0NoFjfddyI',
                 'accept' => 'application/json',

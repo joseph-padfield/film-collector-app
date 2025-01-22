@@ -19,7 +19,8 @@ class TMDBSearchFilmsController extends Controller
     public function __invoke(Request $request, Response $response, array $args)
     {
         $userInput = urlencode($args['userInput']);
-        $apiResponse = $this->model->searchFilmTitle($userInput);
+        $page = $args['page'] ?? 1;
+        $apiResponse = $this->model->searchFilmTitle($userInput, $page);
 
         $data = json_decode($apiResponse, true);
 
