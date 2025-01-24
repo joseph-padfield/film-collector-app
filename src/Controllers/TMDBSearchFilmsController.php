@@ -25,16 +25,23 @@ class TMDBSearchFilmsController extends Controller
 
         $data = json_decode($apiResponse, true);
 
+        //make default sort popularity descending
+
+        if (!isset($args['sortBy']))
+        {
+            $args['sortBy'] = 'popularityDesc';
+        }
+
         if (isset($args['sortBy'])) {
             $sortBy = $args['sortBy'];
 
             if ($sortBy === 'popularityAsc') {
                 usort($data['results'], function ($a, $b) {
-                    return $b['popularity'] <=> $a['popularity'];
+                    return $a['popularity'] <=> $b['popularity'];
                 });
             } elseif ($sortBy === 'popularityDesc') {
                 usort($data['results'], function ($a, $b) {
-                    return $a['popularity'] <=> $b['popularity'];
+                    return $b['popularity'] <=> $a['popularity'];
                 });
             } elseif ($sortBy === 'releasedAsc') {
                 usort($data['results'], function ($a, $b) {
@@ -66,7 +73,7 @@ class TMDBSearchFilmsController extends Controller
                 });
             } else {
                 $errorMessage = [
-                    'error: ' => 'Unknown sort by ' . $sortBy
+                    'error: ' => 'Unknown sort by: ' . $sortBy
                     ];
 
                 $response->getBody()->write(json_encode($errorMessage));
