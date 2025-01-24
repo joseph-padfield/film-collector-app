@@ -43,11 +43,11 @@ class FilmsModel
         }
     }
 
-    public function getFilms(): array
+    public function getFilms($sortBy, $sortOrder): array
     {
-        $sql = 'SELECT * FROM films';
-        $query = $this->db->prepare($sql);
+        $sql = 'SELECT * FROM films ORDER BY ' . $sortBy . ' ' . $sortOrder;
 
+        $query = $this->db->prepare($sql);
         $query->execute();
 
         return $query->fetchAll();
