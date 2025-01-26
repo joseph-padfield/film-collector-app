@@ -47,6 +47,7 @@ class TMDBGetFilmByIdController extends Controller
         //extract actors
         foreach ($data[1]['cast'] as $cast) {
             $castList[] = $cast['name'];
+            $castListString = serialize($castList);
         }
 
         $infoToPass =
@@ -62,7 +63,7 @@ class TMDBGetFilmByIdController extends Controller
                 'director' => $director,
                 'production_companies' => $production_companies,
                 'runtime' => $runtime,
-                'cast' => $castList,
+                'cast' => $castListString,
             ];
 
         $response->getBody()->write(json_encode($infoToPass));

@@ -6,14 +6,17 @@ use App\Abstracts\Controller;
 use App\Models\FilmsModel;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Views\PhpRenderer;
 
 class GetFilmsController extends Controller
 {
     private FilmsModel $model;
+    private PhpRenderer $renderer;
 
-    public function __construct(FilmsModel $model)
+    public function __construct(FilmsModel $model, PhpRenderer $renderer)
     {
         $this->model = $model;
+        $this->renderer = $renderer;
     }
 
     public function __invoke(Request $request, Response $response, array $args): Response
@@ -35,12 +38,12 @@ class GetFilmsController extends Controller
             }
 
             $films = $this->model->getFilms($sortBy, $sortOrder);
-
             if(empty($films)) {
                 return $this->respondWithJson($response, ['message' => 'No films found.'], 204);
             }
 
-            return $this->respondWithJson($response, $films, 200);
+//            return $this->respondWithJson($response, $films, 200);
+            return $this->renderer->render($response, 'test.phtml', ['films'=>$films]);
         } catch (\PDOException $e) {
             return $this->respondWithJson($response, ['error' => 'Internal server error'], 500);
         }

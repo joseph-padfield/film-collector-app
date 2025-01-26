@@ -18,21 +18,21 @@ class FilmsModel
 
     public function addFilm(array $newFilm): int
     {
-        $sql = 'INSERT INTO films (title, year, director, studio, image_url, date_watched, rating, certification, runtime, actors, review_links) VALUES (:title, :year, :director, :studio, :image_url, :date_watched, :rating, :certification, :runtime, :actors, :review_links)';
+        $sql = 'INSERT INTO films (title, release_date, poster_path, tagline, overview, original_language, runtime, date_watched, rating, cast) VALUES (:title, :release_date, :poster_path, :tagline, :overview, :original_language, :runtime, :date_watched, :rating, :cast)';
 
         try {
+
             $query = $this->db->prepare($sql);
-            $query->bindValue(':title', $newFilm['title'], PDO::PARAM_STR);
-            $query->bindValue(':year', $newFilm['year'], PDO::PARAM_INT);
-            $query->bindValue(':director', $newFilm['director'], PDO::PARAM_STR);
-            $query->bindValue(':studio', $newFilm['studio'], PDO::PARAM_STR);
-            $query->bindValue(':image_url', $newFilm['image_url'], PDO::PARAM_STR);
-            $query->bindValue(':date_watched', $newFilm['date_watched'], PDO::PARAM_INT);
-            $query->bindValue(':rating', $newFilm['rating'], PDO::PARAM_INT);
-            $query->bindValue(':certification', $newFilm['certification'], PDO::PARAM_STR);
-            $query->bindValue(':runtime', $newFilm['runtime'], PDO::PARAM_INT);
-            $query->bindValue(':actors', $newFilm['actors'], PDO::PARAM_STR);
-            $query->bindValue(':review_links', $newFilm['review_links'], PDO::PARAM_STR);
+            $query->bindValue(':title', $newFilm['title']);
+            $query->bindValue(':release_date', $newFilm['release_date']);
+            $query->bindValue(':poster_path', $newFilm['poster_path']);
+            $query->bindValue(':tagline', $newFilm['tagline']);
+            $query->bindValue(':overview', $newFilm['overview']);
+            $query->bindValue(':original_language', $newFilm['original_language']);
+            $query->bindValue(':runtime', $newFilm['runtime']);
+            $query->bindValue(':date_watched', $newFilm['date_watched']);
+            $query->bindValue(':rating', $newFilm['rating']);
+            $query->bindValue(':cast', $newFilm['cast']);
 
             $query->execute();
 
