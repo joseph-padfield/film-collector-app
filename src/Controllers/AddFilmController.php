@@ -23,6 +23,7 @@ class AddFilmController extends Controller
     {
         try {
             $newFilm = $request->getParsedBody();
+
             $insertedId = $this->model->addFilm($newFilm);
 
             if ($insertedId)

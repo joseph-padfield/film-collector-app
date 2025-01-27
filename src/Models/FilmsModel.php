@@ -18,7 +18,7 @@ class FilmsModel
 
     public function addFilm(array $newFilm): int
     {
-        $sql = 'INSERT INTO films (title, release_date, poster_path, tagline, overview, original_language, runtime, date_watched, rating, cast) VALUES (:title, :release_date, :poster_path, :tagline, :overview, :original_language, :runtime, :date_watched, :rating, :cast)';
+        $sql = 'INSERT INTO films (title, release_date, poster_path, tagline, overview, original_language, production_countries, director, production_companies, runtime, date_watched, rating, cast) VALUES (:title, :release_date, :poster_path, :tagline, :overview, :original_language, :production_countries, :director, :production_companies, :runtime, :date_watched, :rating, :cast)';
 
         try {
 
@@ -29,9 +29,12 @@ class FilmsModel
             $query->bindValue(':tagline', $newFilm['tagline']);
             $query->bindValue(':overview', $newFilm['overview']);
             $query->bindValue(':original_language', $newFilm['original_language']);
+            $query->bindValue(':production_countries', $newFilm['production_countries']);
+            $query->bindValue(':director', $newFilm['director']);
+            $query->bindValue(':production_companies', $newFilm['production_companies']);
             $query->bindValue(':runtime', $newFilm['runtime']);
-            $query->bindValue(':date_watched', $newFilm['date_watched']);
-            $query->bindValue(':rating', $newFilm['rating']);
+            $query->bindValue(':date_watched', 0);
+            $query->bindValue(':rating', 0);
             $query->bindValue(':cast', $newFilm['cast']);
 
             $query->execute();

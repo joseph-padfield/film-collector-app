@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="../../css/homepage.css" rel="stylesheet">
+    <title>TITLE</title>
+    <script defer src="../../js/homepage.js"></script>
+</head>
+
+<body>
+<nav>
+
+    <a id="add-film-button">Add new film button</a>
+
+    <form id="search-films-form">
+        <label for="search-film-input">Search: </label>
+        <input type="text" id="search-film-input">
+        <input type="submit">
+    </form>
+</nav>
+
+<h1>Reels from the Crypt</h1>
+
+<div class="collection-display">
+
+<?php
+
+foreach ($films as $film) {
+    echo '<div class="film">';
+    echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
+    echo '<h3>' . $film['title'] . '</h3>';
+    echo '<p>Released: ' . $film['release_date'] . '</p>';
+    foreach (unserialize($film['director']) as $director) {
+        echo '<p>Director: ' . $director . '</p>';
+    }
+    echo '';
+    echo '';
+    echo '</div>';
+}
+
+
+
+//function pairs($item)
+//{
+//    $arrays = ['cast', 'director', 'production_countries', 'production_companies'];
+//    $listFields = [];
+//    foreach ($item as $index => $value) {
+//        if (in_array($index, $arrays)) {
+//            try {
+//                // Use $item[$index] to access the correct value
+//                $listFields[$index] = unserialize($item[$index]);
+//            } catch (Exception $e) {
+//                $listFields[$index] = 'Error unserializing data';
+//            }
+//        } else {
+//            $listFields[$index] = $value; // Keep the original value
+//        }
+//    }
+//}
+//
+//array_map('pairs', $films);
+
+
+
+
+?>
+
+</div>
+
+</body>
+
+</html>

@@ -43,7 +43,7 @@ class GetFilmsController extends Controller
             }
 
 //            return $this->respondWithJson($response, $films, 200);
-            return $this->renderer->render($response, 'test.phtml', ['films'=>$films]);
+            return $this->renderer->render($response, 'homepage.phtml', ['films'=>$films]);
         } catch (\PDOException $e) {
             return $this->respondWithJson($response, ['error' => 'Internal server error'], 500);
         }
