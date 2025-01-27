@@ -10,25 +10,18 @@
 
 <body>
 
-<h1>This is a test</h1>
+<h1>Reels from the Crypt</h1>
+
+<form method="get">
+    <label for="searchTerm">Search</label>
+    <input id="searchTerm" type="text" name="searchTerm">
+    <input type="submit">
+</form>
+
 <?php
-
-$keys = array_keys($films[0]);
-
-$testFilm = $films[12];
-
-foreach ($keys as $key) {
-    echo $key . "<br>";
+if (isset($_GET['searchTerm'])) {
+    $thing =  $_GET['searchTerm'];
 }
-
-$testCastList = $testFilm['cast'];
-
-$testCastArray = unserialize($testCastList);
-
-foreach ($testCastArray as $cast) {
-    echo $cast . "<br>";
-}
-
 ?>
 
 </body>
