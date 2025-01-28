@@ -10,64 +10,58 @@
 </head>
 
 <body>
+
 <nav>
-
-    <a id="add-film-button">Add new film button</a>
-
-    <form id="search-films-form">
-        <label for="search-films-input">Search: </label>
-        <input type="text" id="search-films-input">
-        <input type="submit" id="search-films-submit">
-    </form>
+<!--    flex-->
+<!--    fixed to top of screen-->
+    <a>Home</a>
+    <a>Add film</a>
+<!--    Add film button makes add-film-container visible. How to do this?-->
+<!--    add-film-container should be absolute relative to the nav-->
+<!--    acts as a modal. could make it a dialog?-->
+    <div id="add-film-container">
+        <!--    Show a search form. When you press search you will see a list of the results-->
+        <!--    This list ends with a "next" button for multiple pages-->
+        <form>
+            <label for="search-film-db">Film title: </label>
+            <input id="search-film-db" type="text">
+            <input type="submit"/>
+        </form>
+        <!--    This will contain the search results. How to show? Horizontal scroll or vertical list-->
+        <!--    Clicking on a result will open it up with a more detailed view and the option to add to our collection-->
+        <div id="search-results"></div>
+    </div>
 </nav>
-
-<h1>Reels from the Crypt</h1>
+<header>
+<!--    title and hero section-->
+</header>
 
 <div class="collection-display">
+<!--    Like it says, this displays our collection. Change it to ID rather than CLASS-->
+<!--    When we make a change to the collection the view will update to reflect that change-->
 
 <?php
-
-foreach ($films as $film) {
-    echo '<div class="film">';
-    echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
-    echo '<h3>' . $film['title'] . '</h3>';
-    echo '<p>Released: ' . $film['release_date'] . '</p>';
-    foreach (unserialize($film['director']) as $director) {
-        echo '<p>Director: ' . $director . '</p>';
-    }
-    echo '';
-    echo '';
-    echo '</div>';
-}
-
-
-
-//function pairs($item)
-//{
-//    $arrays = ['cast', 'director', 'production_countries', 'production_companies'];
-//    $listFields = [];
-//    foreach ($item as $index => $value) {
-//        if (in_array($index, $arrays)) {
-//            try {
-//                // Use $item[$index] to access the correct value
-//                $listFields[$index] = unserialize($item[$index]);
-//            } catch (Exception $e) {
-//                $listFields[$index] = 'Error unserializing data';
-//            }
-//        } else {
-//            $listFields[$index] = $value; // Keep the original value
-//        }
+//
+//foreach ($films as $film) {
+//    echo '<div class="film">';
+//    echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
+//    echo '<h3>' . $film['title'] . '</h3>';
+//    echo '<p>Released: ' . $film['release_date'] . '</p>';
+//    foreach (unserialize($film['director']) as $director) {
+//        echo '<p>Director: ' . $director . '</p>';
 //    }
+//    echo '';
+//    echo '';
+//    echo '</div>';
 //}
 //
-//array_map('pairs', $films);
-
-
-
-
-?>
+//?>
 
 </div>
+
+<footer>
+<!--    Attribute TMDB here, any other info-->
+</footer>
 
 </body>
 
