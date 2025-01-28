@@ -34,24 +34,43 @@ searchFilmsSubmit.addEventListener('click', async function(event){
         searchResultsContainer.append(filmBox)
         filmBox.append(posterImage)
         filmBox.append(filmTitle)
-        showFilmDetails(filmBox)
+        showFilmDetails(filmBox, result)
     })
 //     if there are more pages of results, i.e. if pages > 1, then show a 'see more' option
 })
 
 // now to select a film to view its contents - try hover - make a function and put it into the event listener above
-const showFilmDetails = (filmBox) => {
+const showFilmDetails = (filmBox, result) => {
     const filmDetails = document.createElement('div')
     filmBox.append(filmDetails)
-    filmBox.addEventListener('click', (e) => {
+    filmBox.addEventListener('click', async (e) => {
         e.preventDefault()
 
-        if (filmDetails.textContent.length > 0) {
-            filmDetails.textContent = ''
+        if (filmDetails.innerHTML.length > 0) {
+            filmDetails.innerHTML = ''
         }
         else {
             // async call get movie by id from tmdb, show data here also button to add to library
-            filmDetails.textContent = 'TESTINGTESTING'
+            let response = await fetch(`http://0.0.0.0:8080/searchFilmId/` + result.id)
+            let movieDetails = await response.json()
+            console.log(movieDetails)
+            filmDetails.innerHTML = '' +
+                '<h3>Year: ' + movieDetails.release_date.slice(0,4) + '</h3>' +
+                '<h3>Director: ' + JSON.parse(movieDetails.director).join(', ') + '</h3>' +
+                '<h3>Overview: ' + movieDetails.overview + '</h3>' +
+                '<h3>Director: ' + JSON.parse(movieDetails.director).join(', ') + '</h3>' +
+                '<h3>Director: ' + JSON.parse(movieDetails.director).join(', ') + '</h3>' +
+                '<h3>Director: ' + JSON.parse(movieDetails.director).join(', ') + '</h3>' +
+                '<h3>Director: ' + JSON.parse(movieDetails.director).join(', ') + '</h3>' +
+                '' +
+                '' +
+                '' +
+                '' +
+                '' +
+                ''
+            // filmDetails.innerHTML = '<h3>Cast: ' + JSON.parse(movieDetails.cast).join(', ') + '</h3>'
+            // filmDetails.innerHTML = '<h3>Cast: ' + JSON.parse(movieDetails.cast).join(', ') + '</h3>'
+            // filmDetails.innerHTML = '<h3>Cast: ' + JSON.parse(movieDetails.cast).join(', ') + '</h3>'
         }
     })
 }
