@@ -14,26 +14,31 @@
 <nav>
 <!--    flex-->
 <!--    fixed to top of screen-->
-    <a>Home</a>
-    <a>Add film</a>
+    <a href="/films">Home</a>
+    <a id="add-film-button">Add film</a>
 <!--    Add film button makes add-film-container visible. How to do this?-->
 <!--    add-film-container should be absolute relative to the nav-->
 <!--    acts as a modal. could make it a dialog?-->
     <div id="add-film-container">
         <!--    Show a search form. When you press search you will see a list of the results-->
         <!--    This list ends with a "next" button for multiple pages-->
-        <form>
-            <label for="search-film-db">Film title: </label>
-            <input id="search-film-db" type="text">
-            <input type="submit"/>
-        </form>
-        <!--    This will contain the search results. How to show? Horizontal scroll or vertical list-->
-        <!--    Clicking on a result will open it up with a more detailed view and the option to add to our collection-->
-        <div id="search-results"></div>
+        <dialog id="search-films-modal">
+            <form>
+                <label for="search-films-input">Search title: </label>
+                <input id="search-films-input" type="text">
+                <input id="search-films-submit" type="submit"/>
+            </form>
+            <button id="close-search-films-modal">Close</button>
+            <div id="search-results-container"></div>
+            <!--    This will contain the search results. How to show? Horizontal scroll or vertical list-->
+            <!--    Clicking on a result will open it up with a more detailed view and the option to add to our collection-->
+        </dialog>
     </div>
 </nav>
 <header>
 <!--    title and hero section-->
+    <h1>Reels from the Crypt</h1>
+    <h2>a film collection</h2>
 </header>
 
 <div class="collection-display">
