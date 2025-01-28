@@ -34,12 +34,27 @@ searchFilmsSubmit.addEventListener('click', async function(event){
         searchResultsContainer.append(filmBox)
         filmBox.append(posterImage)
         filmBox.append(filmTitle)
+        showFilmDetails(filmBox)
     })
 //     if there are more pages of results, i.e. if pages > 1, then show a 'see more' option
 })
 
-// now to select a film to view its contents
+// now to select a film to view its contents - try hover - make a function and put it into the event listener above
+const showFilmDetails = (filmBox) => {
+    const filmDetails = document.createElement('div')
+    filmBox.append(filmDetails)
+    filmBox.addEventListener('click', (e) => {
+        e.preventDefault()
 
+        if (filmDetails.textContent.length > 0) {
+            filmDetails.textContent = ''
+        }
+        else {
+            // async call get movie by id from tmdb, show data here also button to add to library
+            filmDetails.textContent = 'TESTINGTESTING'
+        }
+    })
+}
 
 
 
