@@ -28,14 +28,14 @@ class AddFilmController extends Controller
 
             if ($insertedId)
             {
-                return $this->respondWithJson($response, ['message' => 'success'])->withStatus(303);
+                return $this->respondWithJson($response, json_encode(['message' => 'success']))->withStatus(303);
             }
             else
             {
-                return $this->respondWithJson($response, ['message' => 'Failed to add new film'], 500);
+                return $this->respondWithJson($response, json_encode(['message' => 'Failed to add new film']), 500);
             }
         } catch (\PDOException $e) {
-            return $this->respondWithJson($response, ['message' => $e->getMessage()], 500);
+            return $this->respondWithJson($response, json_encode(['message' => $e->getMessage()]), 500);
         }
     }
 }

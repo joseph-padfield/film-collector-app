@@ -18,7 +18,7 @@ closeSearchFilmsModal.addEventListener('click', (e) => {
     searchFilmsInput.value = ''
 })
 
-searchFilmsSubmit.addEventListener('click', async function(e){
+searchFilmsSubmit.addEventListener('click', async function (e) {
     e.preventDefault()
     let searchResults = null
     let response = await fetch(`http://0.0.0.0:8080/searchFilm/` + searchFilmsInput.value)
@@ -35,7 +35,7 @@ searchFilmsSubmit.addEventListener('click', async function(e){
     }
     searchResults.results.forEach((result) => {
         console.log(result)
-        if (result.poster_path === null || result.release_date == "") {
+        if (result.poster_path === null || result.release_date === "") {
             return
         }
         const filmBox = document.createElement('div')
@@ -47,7 +47,7 @@ searchFilmsSubmit.addEventListener('click', async function(e){
         posterImage.classList.add('poster-image')
 
         const filmTitle = document.createElement("h3")
-        filmTitle.innerText = result.title + ' (' + result.release_date.slice(0,4) + ')'
+        filmTitle.innerText = result.title + ' (' + result.release_date.slice(0, 4) + ')'
         filmTitle.classList.add('film-title')
 
         searchResultsContainer.append(filmBox)
@@ -77,26 +77,50 @@ const showFilmDetails = (filmBox, result) => {
         //if info for another film is already showing, this needs to be hidden
         if (filmDetails.innerHTML.length > 0) {
             filmDetails.innerHTML = ''
-        }
-        else {
+        } else {
             // async call get movie by id from TMDB, show data here also button to add to library
             let response = await fetch(`http://0.0.0.0:8080/searchFilmId/` + result.id)
             let movieDetails = await response.json()
-            console.log(movieDetails)
 
             filmDetails.innerHTML =
-                '<p>Year: ' + movieDetails.release_date.slice(0,4) + '</p>' +
+                '<p>Year: ' + movieDetails.release_date.slice(0, 4) + '</p>' +
                 '<p>Runtime: ' + movieDetails.runtime + '</p>' +
                 '<p>Director: ' + JSON.parse(movieDetails.director).join(', ') + '</p>' +
                 '<p>Overview: ' + movieDetails.overview + '</p>' +
                 '<p>Cast: ' + JSON.parse(movieDetails.cast).join(', ') + '</p>' +
-                '<button>Add to collection</button>'
-        //     event listener to add to DB
+                '<button id="submit-add-to-db">Add to collection</button>'
+
+            addToDb(movieDetails)
+            //     event listener to add to DB
         }
     })
 }
 
-const addToDb = async () => {
-    // event listener
-    // add film to db - fetch request
-}
+const addToDb = async (movieDetails) => {
+    const submit = document.getElementById('submit-add-to-db');
+
+    submit.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        try {
+            let response = await fetch(`http://0.0.0.0:8080/films`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(movieDetails)
+            });
+
+            if (!response.ok) {
+                // Handle errors (e.g., display an error message)
+                const errorData = await response.json();
+                console.error("Error adding film:", errorData);
+            } else {
+                const data = await response.json();
+                console.log('SUCCESS: ', data);
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
+    });
+};

@@ -17,6 +17,7 @@ class TMDBSearchFilmsController extends Controller
         $this->model = $model;
     }
 
+//    TO DO - Handle special characters
     public function __invoke(Request $request, Response $response, array $args)
     {
         $userInput = urlencode($args['userInput']);

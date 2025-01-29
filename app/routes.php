@@ -32,6 +32,7 @@ return function (App $app) {
     });
 
     $app->get('/films[/{sortBy}[/{sortOrder}]]', GetFilmsController::class);
+//    sortBy and sortOrder change to
     $app->post('/films', AddFilmController::class);
     $app->delete('/films/{id}', DeleteFilmController::class);
     $app->put('/films/{id}', UpdateFilmController::class);
