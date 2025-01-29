@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="../../css/homepage.css" rel="stylesheet">
+    <title>TITLE</title>
+    <script defer src="../../js/homepage.js"></script>
+</head>
+
+<body>
+
+<nav>
+<!--    flex-->
+<!--    fixed to top of screen-->
+    <a href="/films">Home</a>
+    <a id="add-film-button">Add film</a>
+<!--    Add film button makes add-film-container visible. How to do this?-->
+<!--    add-film-container should be absolute relative to the nav-->
+<!--    acts as a modal. could make it a dialog?-->
+    <div id="add-film-container">
+        <!--    Show a search form. When you press search you will see a list of the results-->
+        <!--    This list ends with a "next" button for multiple pages-->
+        <dialog id="search-films-modal">
+            <form>
+                <label for="search-films-input">Search title: </label>
+                <input id="search-films-input" type="text">
+                <input id="search-films-submit" type="submit"/>
+            </form>
+            <button id="close-search-films-modal">Close</button>
+            <div id="search-results-container"></div>
+            <!--    This will contain the search results. How to show? Horizontal scroll or vertical list-->
+            <!--    Clicking on a result will open it up with a more detailed view and the option to add to our collection-->
+        </dialog>
+    </div>
+</nav>
+<header>
+<!--    title and hero section-->
+    <h1>Reels from the Crypt</h1>
+    <h2>a film collection</h2>
+</header>
+
+<div class="collection-display">
+<!--    Like it says, this displays our collection. Change it to ID rather than CLASS-->
+<!--    When we make a change to the collection the view will update to reflect that change-->
+
+<?php
+//
+//foreach ($films as $film) {
+//    echo '<div class="film">';
+//    echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
+//    echo '<h3>' . $film['title'] . '</h3>';
+//    echo '<p>Released: ' . $film['release_date'] . '</p>';
+//    foreach (unserialize($film['director']) as $director) {
+//        echo '<p>Director: ' . $director . '</p>';
+//    }
+//    echo '';
+//    echo '';
+//    echo '</div>';
+//}
+//
+//?>
+
+</div>
+
+<footer>
+<!--    Attribute TMDB here, any other info-->
+</footer>
+
+</body>
+
+</html>

@@ -42,13 +42,31 @@ class TMDBGetFilmByIdController extends Controller
                 $director[] = $crew['name'];
             }
         }
+        $directorListString = json_encode($director);
 
         $castList = [];
         //extract actors
         foreach ($data[1]['cast'] as $cast) {
             $castList[] = $cast['name'];
-            $castListString = serialize($castList);
         }
+
+                    $castListString = json_encode($castList);
+
+        //extract production_countries
+        $production_countries_names = [];
+        foreach ($production_countries as $country) {
+            $production_countries_names[] = $country['name'];
+        }
+
+        $production_countriesListString = json_encode($production_countries_names);
+
+        //extract production companies
+        $production_companies_names = [];
+        foreach ($production_companies as $company) {
+            $production_companies_names[] = $company['name'];
+        }
+
+        $production_companiesListString = json_encode($production_companies_names);
 
         $infoToPass =
             [
@@ -59,9 +77,9 @@ class TMDBGetFilmByIdController extends Controller
                 'tagline' => $tagline,
                 'overview' => $overview,
                 'original_language' => $original_language,
-                'production_countries' => $production_countries,
-                'director' => $director,
-                'production_companies' => $production_companies,
+                'production_countries' => $production_countriesListString,
+                'director' => $directorListString,
+                'production_companies' => $production_companiesListString,
                 'runtime' => $runtime,
                 'cast' => $castListString,
             ];

@@ -1,0 +1,4 @@
+#search-results-container {
+    display: flex;
+    overflow: scroll;
+}
