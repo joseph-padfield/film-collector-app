@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Interfaces\FilmsModelInterface;
 use PDO;
 use App\Factories\PDOFactory;
 use PDOException;
 use Psr\Container\ContainerInterface;
 
-class FilmsModel
+class FilmsModel implements FilmsModelInterface
 {
     private PDO $db;
 

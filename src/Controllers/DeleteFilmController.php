@@ -6,20 +6,18 @@ use App\Models\FilmsModel;
 use App\Abstracts\Controller;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\PhpRenderer;
 
 class DeleteFilmController extends Controller
 {
     private FilmsModel $model;
-    private PhpRenderer $renderer;
 
-    public function __construct(FilmsModel $model, PhpRenderer $renderer)
+    public function __construct(FilmsModel $model)
     {
         $this->model = $model;
         $this->renderer = $renderer;
     }
 
-    public function __invoke(Request $request, Response $response, $args): Response
+    public function __invoke(Request $request, Response $response, array $args): Response
     {
         try {
             $id = $this->model->deleteFilm($args['id']);
@@ -28,7 +26,7 @@ class DeleteFilmController extends Controller
             {
                 return $this->respondWithJson($response, ['message' => 'Film not found.'], 404);
             }
-            return $this->respondWithJson($response, ['message' => 'Film deleted successfully.'], 200);
+            return $response->withHeader('Content-Type', '/films')->withStatus(200);
         } catch (\PDOException $e) {
             return $this->respondWithJson($response, ['error' => $e->getMessage()], 500);
         }

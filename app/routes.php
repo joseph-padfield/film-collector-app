@@ -6,7 +6,7 @@ use App\Controllers\DeleteFilmController;
 use Slim\App;
 use Slim\Views\PhpRenderer;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
-use App\Controllers\GetFilmsController;
+use App\Controllers\FilmsController;
 use App\Controllers\AddFilmController;
 use App\Controllers\UpdateFilmController;
 use App\Controllers\TMDBSearchFilmsController;
@@ -31,7 +31,7 @@ return function (App $app) {
         return $renderer->render($response, "index.php", $args);
     });
 
-    $app->get('/films[/{sortBy}[/{sortOrder}]]', GetFilmsController::class);
+    $app->get('/films[/{sortBy}[/{sortOrder}]]', FilmsController::class);
 //    sortBy and sortOrder change to
     $app->post('/films', AddFilmController::class);
     $app->delete('/films/{id}', DeleteFilmController::class);

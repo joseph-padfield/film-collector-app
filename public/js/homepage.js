@@ -111,13 +111,16 @@ const addToDb = async (movieDetails) => {
                 body: JSON.stringify(movieDetails)
             });
 
-            if (!response.ok) {
+            if (!response.status === 201) {
                 // Handle errors (e.g., display an error message)
                 const errorData = await response.json();
                 console.error("Error adding film:", errorData);
             } else {
                 const data = await response.json();
                 console.log('SUCCESS: ', data);
+                // could change the reload later using  AJAX to just update teh collection display html, rather than reloading the whole page. Not a huge deal, though.
+                window.location.reload();
+
             }
         } catch (error) {
             console.error("Fetch error:", error);

@@ -3,17 +3,18 @@
 namespace App\Controllers;
 
 use App\Abstracts\Controller;
-use App\Models\FilmsModel;
+use App\Interfaces\FilmsModelInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\PhpRenderer;
 
-class GetFilmsController extends Controller
+
+class FilmsController extends Controller
 {
-    private FilmsModel $model;
+    private FilmsModelInterface $model;
     private PhpRenderer $renderer;
 
-    public function __construct(FilmsModel $model, PhpRenderer $renderer)
+    public function __construct(FilmsModelInterface $model, PhpRenderer $renderer)
     {
         $this->model = $model;
         $this->renderer = $renderer;
@@ -30,11 +31,11 @@ class GetFilmsController extends Controller
 
             if (!in_array($sortBy, $acceptedSortTerms))
             {
-                return $this->respondWithJson($response, ['message' => 'Invalid sort term.'], 400);
+                return $this->respondWithJson($response, ['message' => 'Invalid sort term. Valid sort terms: ' . implode(', ', $sortBy)], 400);
             }
             if (!in_array($sortOrder, $acceptedOrderTerms))
             {
-                return $this->respondWithJson($response, ['message' => 'Invalid sort order.'], 400);
+                return $this->respondWithJson($response, ['message' => 'Invalid sort order. Valid sort orders: ' . implode(', ', $sortOrder)], 400);
             }
 
             $films = $this->model->getFilms($sortBy, $sortOrder);
@@ -42,7 +43,6 @@ class GetFilmsController extends Controller
                 return $this->respondWithJson($response, ['message' => 'No films found.'], 204);
             }
 
-//            return $this->respondWithJson($response, $films, 200);
             return $this->renderer->render($response, 'homepage.phtml', ['films'=>$films]);
         } catch (\PDOException $e) {
             return $this->respondWithJson($response, ['error' => 'Internal server error'], 500);
