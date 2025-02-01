@@ -2,22 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\FilmsModel;
+use App\Interfaces\FilmsModelInterface;
 use App\Abstracts\Controller;
 use PDOException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\PhpRenderer;
 
+// WORK IN PROGRESS
 class UpdateFilmController extends Controller
 {
-    private FilmsModel $model;
-    private PhpRenderer $renderer;
+    private FilmsModelInterface $model;
 
-    public function __construct(FilmsModel $model, PhpRenderer $renderer)
+    public function __construct(FilmsModelInterface $model)
     {
         $this->model = $model;
-        $this->renderer = $renderer;
     }
 
     public function __invoke(Request $request, Response $response, $args): Response

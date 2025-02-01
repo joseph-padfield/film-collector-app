@@ -32,8 +32,8 @@ class FilmsController extends Controller
             $sortBy = $queryParams['sortBy'] ?? 'date_watched';
             $sortOrder = $queryParams['sortOrder'] ?? 'desc';
 
-            $sortBy = filter_var($sortBy, FILTER_SANITIZE_STRING);
-            $sortOrder = filter_var($sortOrder, FILTER_SANITIZE_STRING);
+            $sortBy = filter_var($sortBy, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sortOrder = filter_var($sortOrder, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             if (!in_array($sortBy, $acceptedSortTerms))
             {

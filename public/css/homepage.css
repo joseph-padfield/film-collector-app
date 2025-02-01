@@ -2,3 +2,14 @@
     display: flex;
     overflow: scroll;
 }
+
+#collection-display {
+    display: flex;
+    width: 100%;
+    overflow: scroll;
+    gap: 1rem;
+}
+
+.film-poster {
+    height: 200px;
+}

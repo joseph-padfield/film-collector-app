@@ -21,7 +21,7 @@ closeSearchFilmsModal.addEventListener('click', (e) => {
 searchFilmsSubmit.addEventListener('click', async function (e) {
     e.preventDefault()
     let searchResults = null
-    let response = await fetch(`http://0.0.0.0:8080/searchFilm/` + searchFilmsInput.value)
+    let response = await fetch(`http://0.0.0.0:8080/searchFilm?title=` + searchFilmsInput.value + '&page=')
     searchResults = await response.json()
     const pages = searchResults.total_pages
     searchResultsContainer.innerHTML = ''
@@ -34,7 +34,6 @@ searchFilmsSubmit.addEventListener('click', async function (e) {
         searchResultsContainer.append(backPage)
     }
     searchResults.results.forEach((result) => {
-        console.log(result)
         if (result.poster_path === null || result.release_date === "") {
             return
         }
@@ -67,11 +66,12 @@ searchFilmsSubmit.addEventListener('click', async function (e) {
     }
 })
 
-// now to select a film to view its contents - try hover - make a function and put it into the event listener above
+// WHEN YOU SHOW DETAILS FOR A FILM, DISABLE THAT FUNCTIONALITY FOR THE OTHER SEARCH RESULTS. SO YOU HAVE TO EXIT THE
+// DETAILED FILM VIEW OF THE CURRENT FILM IN ORDER TO VIEW THAT OF ANOTHER. THIS WILL HOPEFULLY SOLVE A PROBLEM
+// THAT WE HAVE BEEN STUCK ON FOR A WHILE.
 const showFilmDetails = (filmBox, result) => {
     const filmDetails = document.createElement('div')
     filmBox.append(filmDetails)
-
     filmBox.addEventListener('click', async (e) => {
         e.preventDefault()
         //if info for another film is already showing, this needs to be hidden
@@ -79,7 +79,7 @@ const showFilmDetails = (filmBox, result) => {
             filmDetails.innerHTML = ''
         } else {
             // async call get movie by id from TMDB, show data here also button to add to library
-            let response = await fetch(`http://0.0.0.0:8080/searchFilmId/` + result.id)
+            let response = await fetch(`http://0.0.0.0:8080/searchFilm/` + result.id)
             let movieDetails = await response.json()
 
             filmDetails.innerHTML =

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Interfaces\TMDBModelInterface;
 use GuzzleHttp\Client;
 
-class TMDBModel
+class TMDBModel implements TMDBModelInterface
 {
     public function searchFilmTitle($userInput, $page=1)
     {
