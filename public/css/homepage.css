@@ -1,15 +1,159 @@
-#search-results-container {
+@font-face {
+    font-family: 'Aachen Bold';
+    src: url('/fonts/Aachen Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Aachen BT 400';
+    src: url('/fonts/Aachen BT 400.ttf') format('opentype');
+}
+
+@font-face {
+    font-family: 'PPRader-Regular';
+    src: url('/fonts/PPRader-Regular.otf') format('opentype');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    background-color: black;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
     display: flex;
-    overflow: scroll;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+}
+
+.nav-links {
+    text-decoration: none;
+    color: white;
+    font-family: 'PPRader-Regular', sans-serif;
+}
+
+.header-background {
+    background-image: url('../img/cinema-seats.jpg');
+    background-size: cover;
+}
+
+header {
+    padding: 1.5rem 1rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.59), rgb(0, 0, 0));
+}
+
+h1 {
+    font-family: 'Aachen Bold', sans-serif;
+    font-size: 3.5rem;
+    color: gold;
+    text-shadow: crimson -3px -3px;
+    margin: 1rem 0;
+}
+
+h2 {
+    font-family: 'Aachen Bold', sans-serif;
+    color: gold;
+    text-shadow: crimson -2px -2px;
+    margin: 1rem 0;
 }
 
 #collection-display {
     display: flex;
-    width: 100%;
-    overflow: scroll;
     gap: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.film {
+
+}
+
+.film-title, .film-director {
+    color: white;
+    text-wrap: wrap;
+    font-family: 'PPRader-Regular', sans-serif;
+    font-size: 1rem;
+    overflow-wrap: break-word;
 }
 
 .film-poster {
     height: 200px;
 }
+
+/*SEARCH/ADD FILM MODAL*/
+
+#add-film-container {
+    width: 100%;
+}
+
+#film-search-form-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid white;
+}
+
+#search-tmdb-form {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+#search-films-input {
+    padding: 0.25rem;
+    border-radius: 5px;
+    font-family: PPRader-Regular, sans-serif;
+}
+
+#search-films-submit, #close-search-films-modal {
+    padding: 0 0.25rem;
+    font-family: PPRader-Regular, sans-serif;
+    background-color: black;
+    border: solid 1px white;
+    color: white;
+    border-radius: 5px;
+}
+
+#search-films-modal {
+    min-width: 100vw;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.76);
+    align-items: flex-start;
+}
+
+.search-header {
+    font-family: 'PPRader-Regular', sans-serif;
+    font-size: 2rem;
+    color: white;
+    padding-left: 1rem;
+}
+
+#search-results-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+    gap: 2rem;
+    padding: 0.5rem;
+    justify-content: center;
+}
+
+.film-box {
+    width: 5rem;
+}
+
+.poster-image {
+    width: 100%;
+}
+

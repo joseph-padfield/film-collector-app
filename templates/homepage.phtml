@@ -3,72 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link href="../../css/homepage.css" rel="stylesheet">
     <title>TITLE</title>
     <script defer src="../../js/homepage.js"></script>
 </head>
 
 <body>
-<div id="cinema-seats-image-background-container">
 <nav>
-<!--    flex-->
-<!--    fixed to top of screen-->
     <a href="/films" class="nav-links">Home</a>
     <a id="add-film-button" class="nav-links">Add film</a>
-<!--    Add film button makes add-film-container visible. How to do this?-->
-<!--    add-film-container should be absolute relative to the nav-->
-<!--    acts as a modal. could make it a dialog?-->
-    <div id="add-film-container">
-        <!--    Show a search form. When you press search you will see a list of the results-->
-        <!--    This list ends with a "next" button for multiple pages-->
-        <dialog id="search-films-modal">
-            <form>
-                <label for="search-films-input">Search title: </label>
+</nav>
+<div id="add-film-container">
+    <dialog id="search-films-modal">
+        <p class="search-header">Search films database</p>
+        <div id="film-search-form-container">
+            <form id="search-tmdb-form">
                 <input id="search-films-input" type="text">
                 <input id="search-films-submit" type="submit"/>
             </form>
             <button id="close-search-films-modal">Close</button>
-            <div id="search-results-container"></div>
-            <!--    This will contain the search results. How to show? Horizontal scroll or vertical list-->
-            <!--    Clicking on a result will open it up with a more detailed view and the option to add to our collection-->
-        </dialog>
-    </div>
-</nav>
-<header>
-<!--    title and hero section-->
-    <h1>Reels from the Crypt</h1>
-    <h2>a film collection</h2>
-</header>
+        </div>
+        <div id="search-results-container"></div>
+    </dialog>
+</div>
+<div class="header-background">
+    <header>
+        <h1>Reels from the Crypt</h1>
+        <h2>a film collection</h2>
+    </header>
 </div>
 
 <div id="collection-display">
-<!--    Like it says, this displays our collection. Change it to ID rather than CLASS-->
-<!--    When we make a change to the collection the view will update to reflect that change-->
-
-<?php
-
-
-
-foreach ($films as $film)
-{
-    echo '<div class="film">';
-    echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
-    echo '<h3>' . $film['title'] . ' (' . substr($film['release_date'], 0, 4) . ')</h3>';
-    echo '<h4>Dir: ';
-    $directors = html_entity_decode($film['director']);
-    echo implode(", ", json_decode($directors));
-    echo '</h4>';
-    echo '</div>';
-
-}
-
-?>
+    <?php
+    foreach ($films as $film) {
+        echo '<div class="film">';
+        echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
+//    echo '<h3 class="film-title">' . $film['title'] . ' (' . substr($film['release_date'], 0, 4) . ')</h3>';
+//    echo '<h4 class="film-director">Dir: ';
+//    $directors = html_entity_decode($film['director']);
+//    echo implode(", ", json_decode($directors));
+//    echo '</h4>';
+        echo '</div>';
+    }
+    ?>
 
 </div>
 
 <footer>
-<!--    Attribute TMDB here, any other info-->
+    <!--    Attribute TMDB here, any other info-->
 </footer>
 
 </body>
