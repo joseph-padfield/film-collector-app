@@ -66,14 +66,16 @@ h2 {
 #collection-display {
     display: flex;
     gap: 1rem;
-    width: 100%;
+    width: 80%;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
 
 .film {
-
+    height: 200px;
+    width: 150px;
+    position: relative;
 }
 
 .film-title, .film-director {
@@ -85,7 +87,17 @@ h2 {
 }
 
 .film-poster {
+    transition: transform 0.5s ease-in-out;
+    transform-origin: top left;
     height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.film-poster:hover {
+    z-index: 2;
+    transform: scale(2);
 }
 
 /*SEARCH/ADD FILM MODAL*/

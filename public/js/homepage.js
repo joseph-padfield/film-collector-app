@@ -8,6 +8,7 @@ const searchFilmsSubmit = document.getElementById('search-films-submit')
 const searchFilmsInput = document.getElementById('search-films-input')
 const searchResultsContainer = document.getElementById('search-results-container')
 const closeSearchFilmsModal = document.getElementById('close-search-films-modal')
+const paginationAnchor = document.getElementById('pagination-anchor')
 
 addFilmButton.addEventListener('click', openSearchModal)
 closeSearchFilmsModal.addEventListener('click', closeSearchModal)
@@ -82,7 +83,7 @@ function renderPagination(currentPage, totalPages) {
     }
 
     paginationContainer.innerHTML = paginationHtml
-    searchResultsContainer.appendChild(paginationContainer)
+    paginationAnchor.appendChild(paginationContainer)
 
     if (currentPage > 1) {
         const prevButton = paginationContainer.querySelector('.prev-page')
@@ -207,6 +208,7 @@ async function addToDb(movieDetails) {
 
 function clearSearchResults(clearInput) {
     searchResultsContainer.innerHTML = ''
+    paginationAnchor.innerHTML = ''
     if (clearInput === true) {
         searchFilmsInput.value = ''
     }

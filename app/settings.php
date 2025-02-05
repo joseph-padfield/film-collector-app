@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 use DI\ContainerBuilder;
 use Monolog\Logger;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
 return function (ContainerBuilder $containerBuilder) {
     // Global Settings Object
@@ -18,11 +22,14 @@ return function (ContainerBuilder $containerBuilder) {
                 'level' => Logger::DEBUG,
             ],
             'db' => [
-                'host' => 'db',
-                'name' => 'film-collection-app',
-                'user' => 'root',
-                'password' => 'password',
+                'host' => $_ENV['DB_HOST'],
+                'name' => $_ENV['DB_NAME'],
+                'user' => $_ENV['DB_USER'],
+                'password' => $_ENV['DB_PASSWORD'],
                 'debug' => true
+            ],
+            'tmdb' => [
+                'bearer_token' => $_ENV['TMDB_BEARER_TOKEN'],
             ]
         ],
     ]);
