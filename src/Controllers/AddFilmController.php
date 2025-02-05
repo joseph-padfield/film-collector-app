@@ -34,7 +34,7 @@ class AddFilmController extends Controller
             $insertedId = $this->model->addFilm($sanitizedNewFilm);
 
             if ($insertedId > 0) {
-                return $this->respondWithJson($response, json_encode(['message' => 'Film added successfully']), 303);
+                return $this->respondWithJson($response, json_encode(['message' => 'Film added successfully']), 201);
             } else {
                 return $this->respondWithJson($response, json_encode(['message' => 'Failed to add new film']), 500);
             }

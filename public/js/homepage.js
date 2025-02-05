@@ -1,4 +1,3 @@
-// Constants - Move these to the top for easy modification
 const API_BASE_URL = 'http://0.0.0.0:8080'
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w200'
 
@@ -55,9 +54,8 @@ async function fetchFilmData(searchTerm, page = 1) {
     }
 }
 
-
 function renderSearchResults(searchResults) {
-    const { results, total_pages, page } = searchResults
+    const {results, total_pages, page} = searchResults
 
     if (total_pages > 1) {
         renderPagination(page, total_pages)
@@ -120,6 +118,7 @@ function renderFilm(result) {
 
 async function showFilmDetails(filmBox, result) {
     const filmDetails = document.createElement('dialog')
+    filmDetails.classList.add('search-film-detailed-view')
     filmBox.append(filmDetails)
 
     filmBox.addEventListener('click', async (e) => {
@@ -138,9 +137,9 @@ async function showFilmDetails(filmBox, result) {
             }
             renderMovieDetails(filmDetails, movieDetails)
             filmDetails.showModal()
+            filmDetails.scrollTop = 0
 
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Error in showFilmDetails:", error)
         }
     })
@@ -159,19 +158,26 @@ async function fetchFilmDetailsData(movieId) {
     }
 }
 
-function renderMovieDetails(filmDetails, movieDetails) {
-    const { release_date, runtime, director, overview, cast } = movieDetails
+function renderMovieDetails(filmDetails, dbData) {
+    const {title, release_date, runtime, director, overview, cast, poster_path} = dbData
 
     filmDetails.innerHTML = `
-        <p>Year: ${release_date ? release_date.slice(0, 4) : ''}</p>
-        <p>Runtime: ${runtime}</p>
-        <p>Director: ${director ? JSON.parse(director).join(', ') : ''}</p>
-        <p>Overview: ${overview}</p>
-        <p>Cast: ${cast ? JSON.parse(cast).join(', ') : ''}</p>
-        <button id="submit-add-to-db">Add to collection</button>
+        <div class="film-details-container">
+            <div class="film-details-poster">
+                <img src="${IMAGE_BASE_URL}${poster_path}" alt="${title} poster" class="film-details-poster-image" />
+            </div>
+            <div class="film-details-text">
+                <button id="submit-add-to-db">Add to collection</button>
+                <p>Year: ${release_date ? release_date.slice(0, 4) : ''}</p>
+                <p>Runtime: ${runtime}</p>
+                <p>Director: ${director ? JSON.parse(director).join(', ') : ''}</p>
+                <p>Overview: ${overview}</p>
+                <p class="cast-list">Cast: ${cast ? JSON.parse(cast).join(', ') : ''}</p>
+            </div>
+        </div>
     `
 
-    addToDb(movieDetails)
+    addToDb(dbData)
 }
 
 
