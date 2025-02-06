@@ -17,11 +17,13 @@ function openSearchModal(e) {
     e.preventDefault()
     clearSearchResults(true)
     searchFilmModal.showModal()
+    document.body.style.overflow = 'hidden'
 }
 
 function closeSearchModal(e) {
     e.preventDefault()
     searchFilmModal.close()
+    document.body.style.overflow = 'auto'
     clearSearchResults(true)
 }
 
@@ -174,7 +176,16 @@ function renderMovieDetails(filmDetails, dbData) {
     `
 
     addToDb(dbData)
-    closeSearchDetails(filmDetails)
+
+    const closeModal = filmDetails.querySelector('#close-film-details');
+    if (closeModal) {
+        closeModal.addEventListener('click', function closeHandler(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            filmDetails.close();
+            closeModal.removeEventListener('click', closeHandler); // Remove the listener
+        });
+    }
 }
 
 
@@ -210,16 +221,16 @@ async function addToDb(movieDetails) {
 }
 
 function closeSearchDetails(filmDetails) {
-    const closeModal = document.getElementById('close-film-details');
+    const closeModal = document.getElementById('close-film-details')
 
     const closeHandler = (e) => {  // Store the handler function
-        e.preventDefault();
-        e.stopPropagation();
-        filmDetails.close();
-        closeModal.removeEventListener('click', closeHandler); // Remove the listener
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        filmDetails.close()
+        closeModal.removeEventListener('click', closeHandler) // Remove the listener
+    }
 
-    closeModal.addEventListener('click', closeHandler);
+    closeModal.addEventListener('click', closeHandler)
 }
 
 function clearSearchResults(clearInput) {
