@@ -8,10 +8,28 @@ const searchFilmsInput = document.getElementById('search-films-input')
 const searchResultsContainer = document.getElementById('search-results-container')
 const closeSearchFilmsModal = document.getElementById('close-search-films-modal')
 const paginationAnchor = document.getElementById('pagination-anchor')
+const filmContainer = document.getElementById('collection-display')
+
+document.addEventListener('DOMContentLoaded', () => {
+    filmContainer.addEventListener('click', (event) => {  // Use 'event' here
+        const clickedFilm = event.target.closest('.film'); // Find the clicked film element
+
+        if (clickedFilm) {
+            const allFilms = filmContainer.querySelectorAll('.film.expanded')
+            allFilms.forEach(film => {
+                if (film !== clickedFilm) {
+                    film.classList.remove('expanded')
+                }
+            })
+            clickedFilm.classList.toggle('expanded'); // Toggle the 'expanded' class
+        }
+    });
+});
 
 addFilmButton.addEventListener('click', openSearchModal)
 closeSearchFilmsModal.addEventListener('click', closeSearchModal)
 searchFilmsSubmit.addEventListener('click', (event) => searchFilms(searchFilmsInput.value, 1, event))
+
 
 function openSearchModal(e) {
     e.preventDefault()
