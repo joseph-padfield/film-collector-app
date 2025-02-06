@@ -124,11 +124,6 @@ async function showFilmDetails(filmBox, result) {
     filmBox.addEventListener('click', async (e) => {
         e.preventDefault()
 
-        if (filmDetails.open) {
-            filmDetails.close()
-            return
-        }
-
         try {
             const movieDetails = await fetchFilmDetailsData(result.id)
             if (!movieDetails) {
@@ -164,6 +159,7 @@ function renderMovieDetails(filmDetails, dbData) {
     filmDetails.innerHTML = `
         <div class="film-details-container">
             <div class="film-details-poster">
+                <button id="close-film-details"><i class="fa fa-times-circle-o" aria-hidden="true"></i></button>
                 <img src="${IMAGE_BASE_URL}${poster_path}" alt="${title} poster" class="film-details-poster-image" />
             </div>
             <div class="film-details-text">
@@ -178,6 +174,7 @@ function renderMovieDetails(filmDetails, dbData) {
     `
 
     addToDb(dbData)
+    closeSearchDetails(filmDetails)
 }
 
 
@@ -210,6 +207,19 @@ async function addToDb(movieDetails) {
             console.error("Fetch error:", error)
         }
     })
+}
+
+function closeSearchDetails(filmDetails) {
+    const closeModal = document.getElementById('close-film-details');
+
+    const closeHandler = (e) => {  // Store the handler function
+        e.preventDefault();
+        e.stopPropagation();
+        filmDetails.close();
+        closeModal.removeEventListener('click', closeHandler); // Remove the listener
+    };
+
+    closeModal.addEventListener('click', closeHandler);
 }
 
 function clearSearchResults(clearInput) {
