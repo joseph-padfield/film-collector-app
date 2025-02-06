@@ -43,12 +43,20 @@
     foreach ($films as $film) {
         echo '<div class="film">';
         echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
-//    echo '<h3 class="film-title">' . $film['title'] . ' (' . substr($film['release_date'], 0, 4) . ')</h3>';
-//    echo '<h4 class="film-director">Dir: ';
-//    $directors = html_entity_decode($film['director']);
-//    echo implode(", ", json_decode($directors));
-//    echo '</h4>';
+        echo '<div class="film-content">';
+        echo '<h3 class="film-title">' . $film['title'] . ' (' . substr($film['release_date'], 0, 4) . ')</h3>';
+        echo '<h3 class="film-overview">' . $film['overview'] . '</h3>';
+        echo '<h3 class="film-director">Dir: ';
+        $directors = html_entity_decode($film['director']);
+        echo implode(", ", json_decode($directors));
+        echo '</h3>';
+        echo '<h3 class="film-cast">Cast: ';
+        $cast = html_entity_decode($film['cast']);
+        echo implode(", ", json_decode($cast));
+        echo '</h3>';
         echo '</div>';
+        echo '</div>';
+
     }
     ?>
 

@@ -70,34 +70,63 @@ h2 {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    /*padding-bottom: 2rem;*/
+    padding: 0 2rem 2rem 2rem
 }
 
 .film {
+    cursor: pointer;
     height: 150px;
     width: 100px;
     position: relative;
+    transform-origin: center;
+    z-index: 1;
+    transition: transform 0.5s ease-in-out, z-index 0.3s ease-in-out; /* Transition for scaling and z-index */
+}
+.film.expanded {
+    transform: scale(2);
+    z-index: 2;
 }
 
-.film-title, .film-director {
-    color: white;
+.film.expanded .film-content {
+    opacity: 1;
+    visibility: visible;
+}
+
+.film-content {
+    position: absolute;
+    top: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.5s ease-in-out; /* Smooth transitions */
+    background-color: rgba(0, 0, 0, 0.93); /* Example background for content */
+    color: white; /* Example text color */
+    padding: 0.5rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.film-title, .film-director, .film-overview, .film-cast {
+    color: rgba(255, 255, 255, 0.86);
     text-wrap: wrap;
     font-family: 'PPRader-Regular', sans-serif;
-    font-size: 1rem;
+    font-size: 0.4rem;
     overflow-wrap: break-word;
+    letter-spacing: 1.5px;
+    max-height: 5rem;
+    padding: 0.5rem;
+    overflow: scroll;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px rgba(255, 255, 255, 0) inset, -5px -5px 20px rgba(255, 255, 255, 0.15) inset, -5px -5px 20px rgba(255, 255, 255, 0.16);
 }
 
 .film-poster {
-    transition: transform 0.5s ease-in-out;
-    transform-origin: top left;
     height: 150px;
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.film-poster:hover {
-    z-index: 2;
-    transform: scale(2);
 }
 
 /*SEARCH/ADD FILM MODAL*/
@@ -154,6 +183,7 @@ h2 {
     min-height: 100vh;
     background-color: rgba(0, 0, 0, 0.76);
     padding-top: 2rem;
+    position: relative;
 }
 
 .search-header {
@@ -172,6 +202,9 @@ h2 {
     gap: 2rem;
     padding: 0.5rem;
     justify-content: center;
+    padding-bottom: 2rem;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .film-box {
@@ -180,6 +213,20 @@ h2 {
 
 .poster-image {
     width: 100%;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    font-family: 'PPRader-Regular', sans-serif;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.76);
+    padding: 0.5rem;
 }
 
 /*viewing individual film from search*/

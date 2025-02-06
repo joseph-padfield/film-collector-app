@@ -8,20 +8,40 @@ const searchFilmsInput = document.getElementById('search-films-input')
 const searchResultsContainer = document.getElementById('search-results-container')
 const closeSearchFilmsModal = document.getElementById('close-search-films-modal')
 const paginationAnchor = document.getElementById('pagination-anchor')
+const filmContainer = document.getElementById('collection-display')
+
+document.addEventListener('DOMContentLoaded', () => {
+    filmContainer.addEventListener('click', (event) => {  // Use 'event' here
+        const clickedFilm = event.target.closest('.film'); // Find the clicked film element
+
+        if (clickedFilm) {
+            const allFilms = filmContainer.querySelectorAll('.film.expanded')
+            allFilms.forEach(film => {
+                if (film !== clickedFilm) {
+                    film.classList.remove('expanded')
+                }
+            })
+            clickedFilm.classList.toggle('expanded'); // Toggle the 'expanded' class
+        }
+    });
+});
 
 addFilmButton.addEventListener('click', openSearchModal)
 closeSearchFilmsModal.addEventListener('click', closeSearchModal)
 searchFilmsSubmit.addEventListener('click', (event) => searchFilms(searchFilmsInput.value, 1, event))
 
+
 function openSearchModal(e) {
     e.preventDefault()
     clearSearchResults(true)
     searchFilmModal.showModal()
+    document.body.style.overflow = 'hidden'
 }
 
 function closeSearchModal(e) {
     e.preventDefault()
     searchFilmModal.close()
+    document.body.style.overflow = 'auto'
     clearSearchResults(true)
 }
 
@@ -174,7 +194,16 @@ function renderMovieDetails(filmDetails, dbData) {
     `
 
     addToDb(dbData)
-    closeSearchDetails(filmDetails)
+
+    const closeModal = filmDetails.querySelector('#close-film-details');
+    if (closeModal) {
+        closeModal.addEventListener('click', function closeHandler(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            filmDetails.close();
+            closeModal.removeEventListener('click', closeHandler); // Remove the listener
+        });
+    }
 }
 
 
@@ -210,16 +239,16 @@ async function addToDb(movieDetails) {
 }
 
 function closeSearchDetails(filmDetails) {
-    const closeModal = document.getElementById('close-film-details');
+    const closeModal = document.getElementById('close-film-details')
 
     const closeHandler = (e) => {  // Store the handler function
-        e.preventDefault();
-        e.stopPropagation();
-        filmDetails.close();
-        closeModal.removeEventListener('click', closeHandler); // Remove the listener
-    };
+        e.preventDefault()
+        e.stopPropagation()
+        filmDetails.close()
+        closeModal.removeEventListener('click', closeHandler) // Remove the listener
+    }
 
-    closeModal.addEventListener('click', closeHandler);
+    closeModal.addEventListener('click', closeHandler)
 }
 
 function clearSearchResults(clearInput) {
