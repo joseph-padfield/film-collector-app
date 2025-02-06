@@ -7,6 +7,7 @@
           integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link href="../../css/homepage.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>TITLE</title>
     <script defer src="../../js/homepage.js"></script>
 </head>
@@ -14,7 +15,7 @@
 <body>
 <nav>
     <a href="/films" class="nav-links">Home</a>
-    <a id="add-film-button" class="nav-links">Add film</a>
+    <a id="add-film-button" class="nav-links">Add to collection</a>
 </nav>
 <div id="add-film-container">
     <dialog id="search-films-modal">
@@ -23,9 +24,10 @@
             <form id="search-tmdb-form">
                 <input id="search-films-input" type="text">
                 <input id="search-films-submit" type="submit"/>
+                <button id="close-search-films-modal">Close</button>
             </form>
-            <button id="close-search-films-modal">Close</button>
         </div>
+        <div id="pagination-anchor"></div>
         <div id="search-results-container"></div>
     </dialog>
 </div>

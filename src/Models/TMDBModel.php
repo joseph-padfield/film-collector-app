@@ -4,16 +4,26 @@ namespace App\Models;
 
 use App\Interfaces\TMDBModelInterface;
 use GuzzleHttp\Client;
+use Psr\Container\ContainerInterface;
 
 class TMDBModel implements TMDBModelInterface
 {
+    private ContainerInterface $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     public function searchFilmTitle($userInput, $page=1)
     {
         $client = new Client();
+        $settings = $this->container->get('settings');
+        $tmdbToken = $settings['tmdb']['bearer_token'];
 
         $response = $client->request('GET', 'https://api.themoviedb.org/3/search/movie?query=' . $userInput . '&page=' . $page, [
             'headers' => [
-                'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OGEwYWI0MjYxODZkNjgxMDY5YTdkOTIxZmFiZWU3ZSIsIm5iZiI6MTczMzEzNjU2My4yMDQsInN1YiI6IjY3NGQ5MGIzZTdkNmY4MjkyZTBiOGZjNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dWzkHKvEIR4192_L3d10rXcnIImGs0h2_0NoFjfddyI',
+                'Authorization' => 'Bearer ' . $tmdbToken,
                 'accept' => 'application/json',
             ],
         ]);
@@ -24,17 +34,19 @@ class TMDBModel implements TMDBModelInterface
     public function searchFilmId($id)
     {
         $client = new Client();
+        $settings = $this->container->get('settings');
+        $tmdbToken = $settings['tmdb']['bearer_token'];
 
         $response = $client->request('GET', 'https://api.themoviedb.org/3/movie/' . $id, [
             'headers' => [
-                'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OGEwYWI0MjYxODZkNjgxMDY5YTdkOTIxZmFiZWU3ZSIsIm5iZiI6MTczMzEzNjU2My4yMDQsInN1YiI6IjY3NGQ5MGIzZTdkNmY4MjkyZTBiOGZjNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dWzkHKvEIR4192_L3d10rXcnIImGs0h2_0NoFjfddyI',
+                'Authorization' => 'Bearer ' . $tmdbToken,
                 'accept' => 'application/json',
             ],
         ]);
 
         $response2 = $client->request('GET', 'https://api.themoviedb.org/3/movie/' . $id . '/credits', [
             'headers' => [
-                'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OGEwYWI0MjYxODZkNjgxMDY5YTdkOTIxZmFiZWU3ZSIsIm5iZiI6MTczMzEzNjU2My4yMDQsInN1YiI6IjY3NGQ5MGIzZTdkNmY4MjkyZTBiOGZjNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.dWzkHKvEIR4192_L3d10rXcnIImGs0h2_0NoFjfddyI',
+                'Authorization' => 'Bearer ' . $tmdbToken,
                 'accept' => 'application/json',
             ]
         ]);
