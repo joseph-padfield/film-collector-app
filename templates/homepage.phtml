@@ -13,10 +13,6 @@
 </head>
 
 <body>
-<nav>
-    <a href="/films" class="nav-links">Home</a>
-    <a id="add-film-button" class="nav-links">Add to collection</a>
-</nav>
 <div id="add-film-container">
     <dialog id="search-films-modal">
         <p class="search-header">Search films database</p>
@@ -37,13 +33,22 @@
         <h2>a film collection</h2>
     </header>
 </div>
+<nav id="nav-functions">
+    <a href="/films" class="nav-links">Home</a>
+    <a id="add-film-button" class="nav-links">Add to collection</a>
+    <a id="sort-button" class="nav-links">Sort by</a>
+    <div id="sort-options">
+
+    </div>
+</nav>
 
 <div id="collection-display">
     <?php
     foreach ($films as $film) {
-        echo '<div class="film">';
+        echo '<div class="film" data-film-id="' . $film['id'] . '">';
         echo '<img src="' . $film['poster_path'] . '" alt="' . $film['title'] . '" class="film-poster">';
         echo '<div class="film-content">';
+        echo '<button class="delete-film"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
         echo '<h3 class="film-title">' . $film['title'] . ' (' . substr($film['release_date'], 0, 4) . ')</h3>';
         echo '<h3 class="film-overview">' . $film['overview'] . '</h3>';
         echo '<h3 class="film-director">Dir: ';
