@@ -1,8 +1,22 @@
 ## (WORK IN PROGRESS) Film Collector API Documentation
 
-### Introduction
+## Introduction
+This project is a film collector app that allows users to manage their film collection. It uses the TMDB API to search 
+for and display film information, and stores the collection data in a local database. The app is built with Slim 
+framework and SQL database and uses MVC architecture.
 
-This API allows you to manage a film collection database. You can add, retrieve, update, and delete film records. It also integrates with The Movie Database (TMDB) API to search for and retrieve film details.
+---
+
+## Key features:
+
+- Search for films by title
+- Add films to collection
+- Update film details
+- Delete films from collection
+- View collection
+- The app is designed to be simple and easy to use, while providing the essential features for managing a film collection.
+
+---
 
 ### Base URL
 
@@ -18,12 +32,12 @@ http://0.0.0.0:8080
 * **Method:** `GET`
 * **Description:** Retrieves all films from the database.
 * **Optional Parameters:**
-    * `sortBy`: The field to sort by (e.g., title, year, director, date_watched, rating). Defaults to `title`.
-    * `sortOrder`: The sort order (`ASC` or `DESC`). Defaults to `ASC`.
+  * `sortBy`: The field to sort by (e.g., title, year, director, date_watched, rating). Defaults to `title`.
+  * `sortOrder`: The sort order (`ASC` or `DESC`). Defaults to `ASC`.
 * **Response:**
-    * 200 OK: An array of film objects.
-    * 204 No Content: If no films are found.
-    * 400 Bad Request: If invalid sort parameters are provided.
+  * 200 OK: An array of film objects.
+  * 204 No Content: If no films are found.
+  * 400 Bad Request: If invalid sort parameters are provided.
 * **Example Request:**
 ```
 GET http://0.0.0.0:8080/films
@@ -84,8 +98,8 @@ GET http://0.0.0.0:8080/films
 }
 ```
 * **Response:**
-    * 303 See Other: If the film is added successfully.
-    * 500 Internal Server Error: If there is an error adding the film.
+  * 303 See Other: If the film is added successfully.
+  * 500 Internal Server Error: If there is an error adding the film.
 * **Example Request:**
 ```
 POST http://0.0.0.0:8080/films
@@ -97,7 +111,7 @@ POST http://0.0.0.0:8080/films
 * **Method:** `PUT`
 * **Description:** Updates an existing film in the database.
 * **Request Parameters:**
-    * `id`: The ID of the film to update.
+  * `id`: The ID of the film to update.
 * **Request Body:**
 ```json
 {
@@ -106,9 +120,9 @@ POST http://0.0.0.0:8080/films
 }
 ```
 * **Response:**
-    * 200 OK: If the film is updated successfully.
-    * 404 Not Found: If the film is not found.
-    * 500 Internal Server Error: If there is an error updating the film.
+  * 200 OK: If the film is updated successfully.
+  * 404 Not Found: If the film is not found.
+  * 500 Internal Server Error: If there is an error updating the film.
 * **Example Request:**
 ```
 PUT http://0.0.0.0:8080/films/1
@@ -120,11 +134,11 @@ PUT http://0.0.0.0:8080/films/1
 * **Method:** `DELETE`
 * **Description:** Deletes a film from the database.
 * **Request Parameters:**
-    * `id`: The ID of the film to delete.
+  * `id`: The ID of the film to delete.
 * **Response:**
-    * 200 OK: If the film is deleted successfully.
-    * 404 Not Found: If the film is not found.
-    * 500 Internal Server Error: If there is an error deleting the film.
+  * 200 OK: If the film is deleted successfully.
+  * 404 Not Found: If the film is not found.
+  * 500 Internal Server Error: If there is an error deleting the film.
 * **Example Request:**
 ```
 DELETE http://0.0.0.0:8080/films/1
@@ -136,13 +150,13 @@ DELETE http://0.0.0.0:8080/films/1
 * **Method:** `GET`
 * **Description:** Search for a film title using the TMDB API.
 * **Request Parameters:**
-    * `userInput`: The search query.
-    * `page`: The page number of results to retrieve (optional, defaults to 1).
-    * `sortBy`: The field to sort by (optional, defaults to `popularityDesc`).
-        * Allowed values: `popularityAsc`, `popularityDesc`, `releasedAsc`, `releasedDesc`, `original_titleAsc`, `original_titleDesc`, `original_languageAsc`, `original_languageDesc`
+  * `userInput`: The search query.
+  * `page`: The page number of results to retrieve (optional, defaults to 1).
+  * `sortBy`: The field to sort by (optional, defaults to `popularityDesc`).
+    * Allowed values: `popularityAsc`, `popularityDesc`, `releasedAsc`, `releasedDesc`, `original_titleAsc`, `original_titleDesc`, `original_languageAsc`, `original_languageDesc`
 * **Response:**
-    * 200 OK: An array of film objects from TMDB.
-    * 400 Bad Request: If invalid sort parameters are provided.
+  * 200 OK: An array of film objects from TMDB.
+  * 400 Bad Request: If invalid sort parameters are provided.
 * **Example Request:**
 ```
 GET http://0.0.0.0:8080/searchFilm/The%20Godfather
@@ -154,9 +168,9 @@ GET http://0.0.0.0:8080/searchFilm/The%20Godfather
 * **Method:** `GET`
 * **Description:** Retrieve film details by ID using the TMDB API.
 * **Request Parameters:**
-    * `id`: The TMDB ID of the film.
+  * `id`: The TMDB ID of the film.
 * **Response:**
-    * 200 OK: A film object from TMDB.
+  * 200 OK: A film object from TMDB.
 * **Example Request:**
 ```
 GET http://0.0.0.0:8080/searchFilmId/238

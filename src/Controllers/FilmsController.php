@@ -9,7 +9,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\PhpRenderer;
 use Slim\Exception\HttpBadRequestException;
 
-
 class FilmsController extends Controller
 {
     private FilmsModelInterface $model;

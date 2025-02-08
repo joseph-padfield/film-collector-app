@@ -11,7 +11,6 @@
     <title>TITLE</title>
     <script defer src="../../js/homepage.js"></script>
 </head>
-
 <body>
 <div id="add-film-container">
     <dialog id="search-films-modal">
@@ -34,14 +33,10 @@
     </header>
 </div>
 <nav id="nav-functions">
-    <a href="/films" class="nav-links">Home</a>
     <a id="add-film-button" class="nav-links">Add to collection</a>
-    <a id="sort-button" class="nav-links">Sort by</a>
     <div id="sort-options">
-
     </div>
 </nav>
-
 <div id="collection-display">
     <?php
     foreach ($films as $film) {
@@ -64,13 +59,6 @@
 
     }
     ?>
-
 </div>
-
-<footer>
-    <!--    Attribute TMDB here, any other info-->
-</footer>
-
 </body>
-
 </html>

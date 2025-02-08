@@ -37,6 +37,7 @@ html, body {
     text-decoration: none;
     color: white;
     font-family: 'PPRader-Regular', sans-serif;
+    cursor: pointer;
 }
 
 .header-background {
@@ -71,7 +72,6 @@ h2 {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    /*padding-bottom: 2rem;*/
     padding: 0 2rem 2rem 2rem
 }
 
@@ -82,8 +82,9 @@ h2 {
     position: relative;
     transform-origin: center;
     z-index: 1;
-    transition: transform 0.5s ease-in-out, z-index 0.3s ease-in-out; /* Transition for scaling and z-index */
+    transition: transform 0.1s ease-in-out, z-index 0.1s ease-in-out;
 }
+
 .film.expanded {
     transform: scale(2);
     z-index: 2;
@@ -99,9 +100,9 @@ h2 {
     top: 100%;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.8s ease-in-out, visibility 0.5s ease-in-out; /* Smooth transitions */
-    background-color: rgba(0, 0, 0, 0.93); /* Example background for content */
-    color: white; /* Example text color */
+    transition: opacity 0.1s ease-in-out, visibility 0.1s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.93);
+    color: white;
     padding: 0.5rem;
     padding-bottom: 2rem;
     display: flex;
@@ -120,7 +121,7 @@ h2 {
     color: rgba(255, 255, 255, 0.86);
     text-wrap: wrap;
     font-family: 'PPRader-Regular', sans-serif;
-    font-size: 0.4rem;
+    font-size: 0.5rem;
     overflow-wrap: break-word;
     letter-spacing: 1.5px;
     max-height: 5rem;
@@ -135,6 +136,7 @@ h2 {
     position: absolute;
     top: 0;
     left: 0;
+    border-radius: 5px;
 }
 
 .film-title {
@@ -241,9 +243,6 @@ h2 {
     padding: 0.5rem;
 }
 
-/*viewing individual film from search*/
-/*CAN BE APPLIED TO COLLECTION DISPLAY, TOO*/
-
 .search-film-detailed-view {
     width: 100vw;
     min-width: 100%;
@@ -260,8 +259,6 @@ h2 {
     min-height: 100%;
 }
 
-
-
 .film-details-text {
     color: white;
     max-width: 90%;
@@ -272,10 +269,6 @@ h2 {
     flex-direction: column;
     gap: 1rem;
     padding-bottom: 1rem;
-}
-
-.cast-list {
-
 }
 
 .film-details-poster {
@@ -306,19 +299,53 @@ h2 {
 }
 
 @media (min-width: 768px) {
+
+    h1 {
+        font-size: 5rem;
+        text-align: center;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    #collection-display {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    #add-film-button:hover {
+        transform: scale(1.2);
+        color: gold;
+    }
+
+    .film-box {
+        width: 10rem;
+    }
+
+    #search-results-container {
+        height: unset;
+        min-height: unset;
+    }
+
     .film {
-        height: 300px;
-        width: 300px;
+        height: 200px;
+        width: 150px;
     }
 
     .film-poster {
-        height: 300px;
+        height: 200px;
+        z-index: 1;
+    }
+
+    .film-poster:hover {
+        border: solid gold 1px;
+        border-radius: 5px;
     }
 
     .film-title, .film-director, .film-overview, .film-cast {
         max-height: unset;
         overflow: unset;
-
     }
 
     .film-content {
@@ -326,5 +353,19 @@ h2 {
     }
 
     .film.expanded {
+    }
+
+    .delete-film:hover {
+        transform: scale(1.2);
+        border: solid gold 1px;
+    }
+
+    .film-title {
+        font-size: 1rem;
+    }
+
+    #search-films-submit:hover, #close-search-films-modal:hover {
+        transform: scale(1.2);
+        border: solid gold 1px;
     }
 }

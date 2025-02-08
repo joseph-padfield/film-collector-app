@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-
 addFilmButton.addEventListener('click', openSearchModal)
 closeSearchFilmsModal.addEventListener('click', closeSearchModal)
 searchFilmsSubmit.addEventListener('click', (event) => searchFilms(searchFilmsInput.value, 1, event))
