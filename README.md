@@ -2,8 +2,8 @@
 
 ## Introduction
 This project is a film collector app that allows users to manage their film collection. It uses the TMDB API to search 
-for and display film information, and stores the collection data in a local database. The app is built with Slim 
-framework and SQL database and uses MVC architecture.
+for and display film information, and stores the collection data in a SQL database. The app is built with Slim 
+framework.
 
 ---
 
@@ -15,6 +15,18 @@ framework and SQL database and uses MVC architecture.
 - Delete films from collection
 - View collection
 - The app is designed to be simple and easy to use, while providing the essential features for managing a film collection.
+
+---
+
+### Environment variables
+
+The following variables need to be set in a .env file. A bearer token from TMDB is needed.
+
+DB_HOST  
+DB_NAME  
+DB_USER  
+DB_PASSWORD  
+TMDB_BEARER_TOKEN
 
 ---
 
@@ -184,10 +196,3 @@ The API uses standard HTTP status codes to indicate success or failure of reques
 
 Currently, the API does not implement authentication or authorization. All endpoints are publicly accessible.
 
-### Contributing
-
-Contributions to the project are welcome. Please follow the guidelines in the CONTRIBUTING.md file.
-
-### License
-
-This project is licensed under the MIT License.
