@@ -1,9 +1,6 @@
 ## (WORK IN PROGRESS) Film Collector API Documentation
 
-## Introduction
-This project is a film collector app that allows users to manage their film collection. It uses the TMDB API to search 
-for and display film information, and stores the collection data in a SQL database. The app is built with Slim 
-framework.
+This Film Collector App is a full-stack web application designed to help users manage and organise their personal film libraries. Built with a PHP backend using the Slim framework, it integrates the TMDB API to fetch and display rich film data, while securely storing user collections in a structured SQL database. The backend architecture follows modular design principles, leveraging dependency injection for clean, maintainable code across logging, database access, and data models. Core security best practices - including strict typing, CORS policy enforcement, and input validation - have been implemented to safeguard endpoints and enhance the overall resilience of the application.
 
 ---
 
